@@ -80,50 +80,161 @@ body {
     pointer-events: none;
 }
 
-.business-card {
-    width: 350px;
-    height: 200px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+/* Business Card Image Container (for photorealistic image) */
+.business-card-image-container {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: floatCard 3s ease-in-out infinite;
+}
+
+.business-card-image {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    object-fit: contain;
+}
+
+@keyframes floatCard {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-10px) rotate(2deg) scale(1.02);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    75% {
+        transform: translateY(-10px) rotate(-2deg) scale(1.02);
+    }
+}
+
+/* CSS Styled Business Card (with green/black diagonal design) */
+.business-card {
+    width: 400px;
+    height: 240px;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
     animation: rotateCard 3s ease-in-out infinite;
     transform-style: preserve-3d;
+    background: #000;
+}
+
+.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Diagonal split: Top half green gradient, bottom half black */
+.card-top-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg, #1a5f3f 0%, #0d3d26 50%, #0a2e1c 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.card-bottom-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #000000;
+    clip-path: polygon(0 45%, 100% 55%, 100% 100%, 0 100%);
+}
+
+/* Logo placeholder in green section */
+.card-logo-placeholder {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 24px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    padding: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-subtitle {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.card-email,
+.card-phone {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
 }
 
 @keyframes rotateCard {
     0%, 100% {
-        transform: rotateY(0deg) scale(1);
+        transform: rotateY(0deg) rotateX(5deg) scale(1);
     }
     25% {
-        transform: rotateY(5deg) scale(1.02);
+        transform: rotateY(5deg) rotateX(8deg) scale(1.02);
     }
     50% {
-        transform: rotateY(0deg) scale(1);
+        transform: rotateY(0deg) rotateX(5deg) scale(1);
     }
     75% {
-        transform: rotateY(-5deg) scale(1.02);
+        transform: rotateY(-5deg) rotateX(8deg) scale(1.02);
     }
-}
-
-.card-content {
-    text-align: center;
-    padding: 20px;
-}
-
-.card-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #007BFF;
-    margin-bottom: 10px;
-}
-
-.card-subtitle {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #6C757D;
 }
 
 /* ============================================
@@ -643,16 +754,32 @@ body {
     }
 
     .business-card {
-        width: 300px;
-        height: 180px;
+        width: 320px;
+        height: 200px;
+    }
+
+    .business-card-image-container {
+        max-width: 90%;
+        padding: 0 20px;
     }
 
     .card-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .card-subtitle {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .card-email,
+    .card-phone {
+        font-size: 0.75rem;
+    }
+
+    .card-logo-placeholder {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
     }
 
     .social-links {
