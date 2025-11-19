@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Egi Agung Santoso Pardede - Digital Solutions Enthusiast dan Project Leader">
+    <meta name="author" content="Egi Agung Santoso Pardede">
+    <title>Portfolio - Egi Agung Santoso Pardede</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="business-card">
+            <div class="card-content">
+                <h2 class="card-title">Nama: Egi Agung Santoso Pardede</h2>
+                <p class="card-subtitle">Valid: Life Time</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Egi Agung S.P.</div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="home">
+        <!-- Header Section -->
+        <header class="hero-section">
+            <h1 class="hero-title">Hi, saya Egi Agung Santoso Pardede</h1>
+            <p class="hero-subtitle">
+                Saya Egi Agung Santoso Pardede, seorang penggemar solusi digital dan penggerak tim proyek. 
+                Saya percaya bahwa keputusan tepat lahir dari data yang kuat dan eksekusi yang terstruktur. 
+                Dengan menggabungkan pemikiran analitis dan pendekatan manajemen yang kolaboratif, saya membantu 
+                mengubah ide menjadi produk yang bernilai bagi pengguna dan bisnis.
+            </p>
+        </header>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section" id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Portfolio</h2>
+                
+                <!-- Filter Buttons -->
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web-dev">Web Development</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                    <button class="filter-btn" data-filter="data-analytics">Data Analytics</button>
+                    <button class="filter-btn" data-filter="project-management">Project Management</button>
+                    <button class="filter-btn" data-filter="digital-solutions">Digital Solutions</button>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <!-- Portfolio Item 1 -->
+                    <div class="portfolio-card" data-category="web-dev">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Web Development Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Web Development Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Web Development</span>
+                            <h3 class="card-title">E-Commerce Platform</h3>
+                            <p class="card-description">
+                                Platform e-commerce modern dengan fitur lengkap untuk manajemen produk, 
+                                keranjang belanja, dan sistem pembayaran terintegrasi.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 2 -->
+                    <div class="portfolio-card" data-category="web-dev">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80" alt="Web Application Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Web Application Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Web Development</span>
+                            <h3 class="card-title">Project Management Dashboard</h3>
+                            <p class="card-description">
+                                Dashboard interaktif untuk manajemen proyek dengan visualisasi data real-time 
+                                dan kolaborasi tim yang efisien.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 3 -->
+                    <div class="portfolio-card" data-category="mobile">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80" alt="Mobile App Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Mobile App Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Mobile Apps</span>
+                            <h3 class="card-title">Task Management Mobile App</h3>
+                            <p class="card-description">
+                                Aplikasi mobile untuk manajemen tugas dengan fitur notifikasi, 
+                                sinkronisasi cloud, dan antarmuka yang intuitif.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 4 -->
+                    <div class="portfolio-card" data-category="data-analytics">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Data Analytics Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Data Analytics Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Data Analytics</span>
+                            <h3 class="card-title">Business Intelligence Dashboard</h3>
+                            <p class="card-description">
+                                Sistem analisis data bisnis dengan visualisasi interaktif untuk 
+                                mendukung pengambilan keputusan berbasis data.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 5 -->
+                    <div class="portfolio-card" data-category="project-management">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Project Management Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Project Management Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Project Management</span>
+                            <h3 class="card-title">Agile Team Collaboration Tool</h3>
+                            <p class="card-description">
+                                Platform kolaborasi tim dengan metodologi Agile, termasuk sprint planning, 
+                                backlog management, dan tracking progress.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 6 -->
+                    <div class="portfolio-card" data-category="digital-solutions">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Digital Solutions Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Digital Solutions Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Digital Solutions</span>
+                            <h3 class="card-title">Digital Transformation Platform</h3>
+                            <p class="card-description">
+                                Solusi digital komprehensif untuk transformasi bisnis dengan integrasi 
+                                berbagai sistem dan otomatisasi proses.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 7 -->
+                    <div class="portfolio-card" data-category="web-dev">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="Web Development Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Web Development Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Web Development</span>
+                            <h3 class="card-title">UI/UX Design System</h3>
+                            <p class="card-description">
+                                Sistem desain UI/UX yang konsisten dengan komponen reusable untuk 
+                                mempercepat pengembangan aplikasi web modern.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 8 -->
+                    <div class="portfolio-card" data-category="data-analytics">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="Data Analytics Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="card-link" aria-label="View Data Analytics Project Details">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">Data Analytics</span>
+                            <h3 class="card-title">Predictive Analytics Model</h3>
+                            <p class="card-description">
+                                Model analitik prediktif menggunakan machine learning untuk forecasting 
+                                dan optimasi strategi bisnis.
+                            </p>
+                            <a href="#" class="card-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <h2 class="section-title">Tentang Saya</h2>
+                <div class="about-content">
+                    <p>
+                        Sebagai seorang penggemar solusi digital dan penggerak tim proyek, saya memiliki 
+                        passion dalam menggabungkan teknologi dengan strategi bisnis. Pendekatan saya 
+                        berfokus pada data-driven decisions dan eksekusi yang terstruktur untuk menghasilkan 
+                        produk yang bernilai tinggi.
+                    </p>
+                    <p>
+                        Dengan pengalaman dalam berbagai bidang seperti web development, mobile apps, 
+                        data analytics, dan project management, saya membantu tim dan organisasi mencapai 
+                        tujuan mereka melalui solusi digital yang inovatif.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Kontak</h2>
+                <div class="contact-content">
+                    <p>Mari berkolaborasi dan wujudkan ide Anda menjadi produk digital yang luar biasa!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub Profile">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email Contact">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">&copy; 2024 Egi Agung Santoso Pardede. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
