@@ -279,14 +279,13 @@ function validateForm(form) {
 }
 
 // ============================================
-// Fluid Splash Cursor for Navbar
+// Fluid Splash Background
 // ============================================
 
 (function() {
-    const navElement = document.getElementById('navbar');
-    const canvas = document.getElementById('fluid-canvas');
+    const canvas = document.getElementById('fluid-background');
 
-    if (!navElement || !canvas) {
+    if (!canvas) {
         return;
     }
 
@@ -307,9 +306,9 @@ function validateForm(form) {
         TRANSPARENT: true
     };
 
-    initSplashCursor(navElement, canvas, defaultConfig);
+    initSplashCursor(canvas, defaultConfig);
 
-    function initSplashCursor(nav, canvasElement, configOverrides) {
+    function initSplashCursor(canvasElement, configOverrides) {
         function Pointer() {
             this.id = -1;
             this.texcoordX = 0;
@@ -931,7 +930,7 @@ function validateForm(form) {
         updateKeywords();
         resizeCanvas();
         initFramebuffers();
-        seedInitialSplats(6);
+        seedInitialSplats(8);
 
         let lastUpdateTime = Date.now();
         let colorUpdateTimer = 0.0;
@@ -955,9 +954,8 @@ function validateForm(form) {
         }
 
         function resizeCanvas() {
-            const rect = nav.getBoundingClientRect();
-            let width = Math.floor(rect.width * (window.devicePixelRatio || 1));
-            let height = Math.floor(rect.height * (window.devicePixelRatio || 1));
+            let width = scaleByPixelRatio(window.innerWidth);
+            let height = scaleByPixelRatio(window.innerHeight);
             width = Math.max(width, 1);
             height = Math.max(height, 1);
             if (canvasElement.width !== width || canvasElement.height !== height) {
@@ -1230,29 +1228,24 @@ function validateForm(form) {
         }
 
         function getRelativePosition(clientX, clientY) {
-            const rect = nav.getBoundingClientRect();
+            const rect = canvasElement.getBoundingClientRect();
             const x = clientX - rect.left;
             const y = clientY - rect.top;
-            if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
-                return null;
-            }
             return {
                 x: scaleByPixelRatio(x),
                 y: scaleByPixelRatio(y)
             };
         }
 
-        nav.addEventListener('mousedown', e => {
+        window.addEventListener('mousedown', e => {
             const coords = getRelativePosition(e.clientX, e.clientY);
-            if (!coords) return;
             let pointer = pointers[0];
             updatePointerDownData(pointer, -1, coords.x, coords.y);
             clickSplat(pointer);
         });
 
-        nav.addEventListener('mousemove', e => {
+        window.addEventListener('mousemove', e => {
             const coords = getRelativePosition(e.clientX, e.clientY);
-            if (!coords) return;
             let pointer = pointers[0];
             updatePointerMoveData(pointer, coords.x, coords.y, pointer.color);
         });
@@ -1262,34 +1255,40 @@ function validateForm(form) {
             updatePointerUpData(pointer);
         });
 
-        nav.addEventListener('touchstart', e => {
-            const touches = e.targetTouches;
-            let pointer = pointers[0];
-            for (let i = 0; i < touches.length; i++) {
-                const coords = getRelativePosition(touches[i].clientX, touches[i].clientY);
-                if (!coords) continue;
-                updatePointerDownData(pointer, touches[i].identifier, coords.x, coords.y);
-            }
-        });
+        window.addEventListener(
+            'touchstart',
+            e => {
+                const touches = e.targetTouches;
+                let pointer = pointers[0];
+                for (let i = 0; i < touches.length; i++) {
+                    const coords = getRelativePosition(touches[i].clientX, touches[i].clientY);
+                    updatePointerDownData(pointer, touches[i].identifier, coords.x, coords.y);
+                }
+            },
+            { passive: true }
+        );
 
-        nav.addEventListener(
+        window.addEventListener(
             'touchmove',
             e => {
                 const touches = e.targetTouches;
                 let pointer = pointers[0];
                 for (let i = 0; i < touches.length; i++) {
                     const coords = getRelativePosition(touches[i].clientX, touches[i].clientY);
-                    if (!coords) continue;
                     updatePointerMoveData(pointer, coords.x, coords.y, pointer.color);
                 }
             },
             { passive: true }
         );
 
-        window.addEventListener('touchend', () => {
-            let pointer = pointers[0];
-            updatePointerUpData(pointer);
-        });
+        window.addEventListener(
+            'touchend',
+            () => {
+                let pointer = pointers[0];
+                updatePointerUpData(pointer);
+            },
+            { passive: true }
+        );
 
         updateFrame();
     }
