@@ -472,6 +472,7 @@ function validateForm(form) {
             let program = gl.createProgram();
             gl.attachShader(program, vertexShader);
             gl.attachShader(program, fragmentShader);
+            gl.bindAttribLocation(program, 0, 'aPosition');
             gl.linkProgram(program);
             if (!gl.getProgramParameter(program, gl.LINK_STATUS)) console.trace(gl.getProgramInfoLog(program));
             return program;
@@ -928,7 +929,9 @@ function validateForm(form) {
         }
 
         updateKeywords();
+        resizeCanvas();
         initFramebuffers();
+        seedInitialSplats(6);
 
         let lastUpdateTime = Date.now();
         let colorUpdateTimer = 0.0;
@@ -1085,6 +1088,17 @@ function validateForm(form) {
             gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
             blit(dye.write);
             dye.swap();
+        }
+
+        function seedInitialSplats(count) {
+            for (let i = 0; i < count; i++) {
+                const color = generateColor();
+                const x = Math.random();
+                const y = Math.random();
+                const dx = (Math.random() - 0.5) * config.SPLAT_FORCE * 0.3;
+                const dy = (Math.random() - 0.5) * config.SPLAT_FORCE * 0.3;
+                splat(x, y, dx, dy, color);
+            }
         }
 
         function correctRadius(radius) {
