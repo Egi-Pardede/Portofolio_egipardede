@@ -4,17 +4,146 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const loadingScreen = document.getElementById('loading-screen');
-    
-    // Hide loading screen after 4 seconds (adjustable between 3-5 seconds)
-    setTimeout(() => {
-        loadingScreen.classList.add('fade-out');
-        
-        // Remove from DOM after fade out completes
+    const getStartedBtn = document.getElementById('get-started-btn');
+    let dismissed = false;
+
+    if (!loadingScreen) return;
+
+    function dismissLoading() {
+        if (dismissed) return;
+        dismissed = true;
+        loadingScreen.classList.add('entering');
+
         setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500); // Match CSS transition duration
-    }, 4000);
+            loadingScreen.classList.add('fade-out');
+
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 600);
+        }, 900);
+    }
+
+    getStartedBtn?.addEventListener('click', dismissLoading);
+
+    // Fallback auto-dismiss in case user does not click
+    setTimeout(dismissLoading, 10000);
 });
+
+(function() {
+    const canvas = document.getElementById('galaxy-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+    let particles = [];
+    const params = {
+        density: 1.3,
+        glowIntensity: 0.5,
+        saturation: 0.8,
+        hueShift: 240,
+        mouseInteraction: true,
+        mouseRepulsion: true
+    };
+
+    const mouse = {
+        x: 0,
+        y: 0,
+        active: false,
+        parallaxX: 0,
+        parallaxY: 0
+    };
+
+    function createParticle() {
+        const depth = Math.random() * 3 + 1;
+        return {
+            angle: Math.random() * Math.PI * 2,
+            radius: Math.pow(Math.random(), 0.6) * Math.max(width, height) * 0.55,
+            speed: (0.00025 + Math.random() * 0.001) * depth,
+            size: 0.4 + Math.random() * 1.6,
+            depth,
+            color: `hsl(${params.hueShift + Math.random() * 60}, ${params.saturation * 100}%, ${60 + Math.random() * 15}%)`
+        };
+    }
+
+    function createParticles() {
+        const total = Math.max(200, Math.floor(width * params.density));
+        particles = Array.from({ length: total }, createParticle);
+    }
+
+    function resize() {
+        dpr = window.devicePixelRatio || 1;
+        width = canvas.clientWidth || window.innerWidth;
+        height = canvas.clientHeight || window.innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+        createParticles();
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+
+        particles.forEach(particle => {
+            particle.angle += particle.speed;
+            const parallaxFactor = mouse.active && params.mouseInteraction ? particle.depth * 20 : 0;
+            const parallaxX = parallaxFactor ? mouse.parallaxX * parallaxFactor : 0;
+            const parallaxY = parallaxFactor ? mouse.parallaxY * parallaxFactor : 0;
+            const x = width / 2 + Math.cos(particle.angle) * particle.radius + parallaxX;
+            const y = height / 2 + Math.sin(particle.angle) * particle.radius + parallaxY;
+
+            ctx.beginPath();
+            ctx.fillStyle = particle.color;
+            ctx.shadowColor = particle.color;
+            ctx.shadowBlur = 12 * params.glowIntensity * particle.depth;
+            ctx.arc(x, y, particle.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        ctx.restore();
+        requestAnimationFrame(render);
+    }
+
+    function updateMousePosition(point) {
+        mouse.active = true;
+        mouse.x = point.clientX;
+        mouse.y = point.clientY;
+        const repulsion = params.mouseRepulsion ? -1 : 1;
+        mouse.parallaxX = ((mouse.x / window.innerWidth) - 0.5) * repulsion;
+        mouse.parallaxY = ((mouse.y / window.innerHeight) - 0.5) * repulsion;
+    }
+
+    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener(
+        'touchmove',
+        e => {
+            if (e.touches[0]) {
+                updateMousePosition(e.touches[0]);
+            }
+        },
+        { passive: true }
+    );
+
+    window.addEventListener('mouseleave', () => {
+        mouse.active = false;
+    });
+
+    window.addEventListener(
+        'touchend',
+        () => {
+            mouse.active = false;
+        },
+        { passive: true }
+    );
+
+    window.addEventListener('resize', resize);
+    resize();
+    render();
+})();
 
 // ============================================
 // Theme Toggle (Dark/Light Mode)
